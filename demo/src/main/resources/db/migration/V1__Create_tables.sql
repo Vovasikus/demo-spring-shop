@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS roles (
+  id SERIAL PRIMARY KEY,
+  role VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS goods (
+  id SERIAL PRIMARY KEY,
+  product VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS persistent_logins (
+  username VARCHAR(64) NOT NULL,
+  series VARCHAR(64) PRIMARY KEY,
+  token VARCHAR(64) NOT NULL,
+  last_used TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users_roles (
+  user_id SERIAL PRIMARY KEY REFERENCES users (id),
+  role_id SERIAL REFERENCES roles (id)
+);
+
